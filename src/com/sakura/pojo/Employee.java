@@ -1,5 +1,7 @@
 package com.sakura.pojo;
 
+import java.util.Objects;
+
 /**
  * @Author: Sakura
  * @Description:
@@ -9,20 +11,29 @@ public class Employee {
 
     private String name;
 
-    private int age;
+    private Integer age;
 
-    private int salary;
+    private Integer salary;
+
+    private Status Status;
 
     public Employee() {
     }
 
-    public Employee(String name, int age, int salary) {
+    public Employee(String name, Integer age, Integer salary) {
         this.name = name;
         this.age = age;
         this.salary = salary;
     }
 
-    public Employee(int age) {
+    public Employee(String name, Integer age, Integer salary, Employee.Status status) {
+        this.name = name;
+        this.age = age;
+        this.salary = salary;
+        Status = status;
+    }
+
+    public Employee(Integer age) {
         this.age = age;
     }
 
@@ -34,20 +45,28 @@ public class Employee {
         this.name = name;
     }
 
-    public int getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 
-    public int getSalary() {
+    public Integer getSalary() {
         return salary;
     }
 
-    public void setSalary(int salary) {
+    public void setSalary(Integer salary) {
         this.salary = salary;
+    }
+
+    public Employee.Status getStatus() {
+        return Status;
+    }
+
+    public void setStatus(Employee.Status status) {
+        Status = status;
     }
 
     @Override
@@ -56,6 +75,29 @@ public class Employee {
                 "name='" + name + '\'' +
                 ", age=" + age +
                 ", salary=" + salary +
+                ", Status=" + Status +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Employee employee = (Employee) o;
+        return Objects.equals(name, employee.name) &&
+                Objects.equals(age, employee.age) &&
+                Objects.equals(salary, employee.salary);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(name, age, salary);
+    }
+
+    public enum Status {
+        FREE,
+        BUYS,
+        VOCATION
     }
 }
